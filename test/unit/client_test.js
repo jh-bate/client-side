@@ -277,4 +277,161 @@ describe('platform client', function() {
 
   });
 
+  describe('getMessageThread', function() {
+
+    it('returns the messages for a given thread', function(done) {
+
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : {},
+        messageClient : require('../mock/mockMessageClient')(),
+        amardaClient : {}
+      };
+
+      client = require('../../lib/client')(mockedServiceClients);
+
+      client.getMessageThread('1234','token4user',function(error,messages){
+        expect(messages).to.exist;
+        expect(messages).to.be.a('array');
+        expect(error).to.not.exist;
+        done();
+      });
+
+    });
+
+    it('returns error when one is found', function(done) {
+
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : {},
+        messageClient : require('../mock/mockMessageClient')(true),
+        amardaClient : {}
+      };
+
+      client = require('../../lib/client')(mockedServiceClients);
+
+      client.getMessageThread('1234','token4user',function(error,messages){
+        expect(messages).to.not.exist;
+        expect(error).to.exist;
+        done();
+      });
+
+    });
+
+  });
+
+  describe('replyToMessageThread', function() {
+
+    it('returns the id of the added message', function(done) {
+
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : {},
+        messageClient : require('../mock/mockMessageClient')(),
+        amardaClient : {}
+      };
+
+      client = require('../../lib/client')(mockedServiceClients);
+
+      var parentMessageId = '9999999sd9';
+
+      var theMessage = {
+        groupid: '12345',
+        parentmessage: parentMessageId,
+        messagetext: 'some comment'
+      };
+
+      client.replyToMessageThread(theMessage,parentMessageId,'token4user',function(error,id){
+        expect(id).to.exist;
+        expect(error).to.not.exist;
+        done();
+      });
+
+    });
+
+    it('returns error when one is found', function(done) {
+
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : {},
+        messageClient : require('../mock/mockMessageClient')(true),
+        amardaClient : {}
+      };
+
+      client = require('../../lib/client')(mockedServiceClients);
+
+      var parentMessageId = '9999999sd9';
+
+      var theMessage = {
+        groupid: '12345',
+        parentmessage: parentMessageId,
+        messagetext: 'some comment'
+      };
+
+      client.replyToMessageThread(theMessage,parentMessageId,'token4user',function(error,id){
+        expect(id).to.not.exist;
+        expect(error).to.exist;
+        done();
+      });
+
+    });
+
+  });
+
+  describe('startMessageThread', function() {
+
+    it('returns the id of the new message', function(done) {
+
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : {},
+        messageClient : require('../mock/mockMessageClient')(),
+        amardaClient : {}
+      };
+
+      client = require('../../lib/client')(mockedServiceClients);
+
+      var groupId = 'dd779999sd9';
+
+      var theMessage = {
+        groupid: groupId,
+        messagetext: 'some new message'
+      };
+
+      client.startMessageThread(theMessage,groupId,'token4user',function(error,id){
+        expect(id).to.exist;
+        expect(error).to.not.exist;
+        done();
+      });
+
+    });
+
+    it('returns error when one is found', function(done) {
+
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : {},
+        messageClient : require('../mock/mockMessageClient')(true),
+        amardaClient : {}
+      };
+
+      client = require('../../lib/client')(mockedServiceClients);
+
+      var groupId = 'dd779999sd9';
+
+      var theMessage = {
+        groupid: groupId,
+        messagetext: 'some new message'
+      };
+
+      client.startMessageThread(theMessage,groupId,'token4user',function(error,id){
+        expect(id).to.not.exist;
+        expect(error).to.exist;
+        done();
+      });
+
+    });
+
+  });
+
 });

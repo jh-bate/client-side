@@ -40,6 +40,43 @@ module.exports = function(throwError) {
       }
 
       return cb(null,messages);
-    }
+    },
+    getThreadMessages : function(parentMessageId, token, cb){
+
+      var thread = [{
+        id:parentMessageId,
+        groupid:11234,
+        messagetext:'a message'
+      },
+      {
+        id:33456,
+        parentmessage:parentMessageId,
+        groupid:11234,
+        messagetext:'a comment'
+      }];
+
+      if(throwError){
+        return cb(new Error(),null);
+      }
+
+      return cb(null,thread);
+
+    },
+    addToThread : function(message, parentMessageId, token, cb){
+
+      if(throwError){
+        return cb(new Error(),null);
+      }
+      //expect id of added message
+      return cb(null,9999999);
+
+    },
+    startNewThread : function(message, groupId, token, cb){
+      if(throwError){
+        return cb(new Error(),null);
+      }
+      //expect id of new message
+      return cb(null,8888888);
+    },
   };
 };
