@@ -19,7 +19,7 @@ var expect = require('chai').expect;
 describe('platform client', function() {
 
   var client;
-/*
+
   describe('basics', function() {
 
     before(function(){
@@ -29,10 +29,7 @@ describe('platform client', function() {
         messageClient : {},
         amardaClient : {}
       };
-
-      var mockedRequest = {};
-
-      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+      client = require('../../lib/client')(mockedServiceClients);
     });
 
     it('method to loginUser', function(done) {
@@ -71,10 +68,8 @@ describe('platform client', function() {
         amardaClient : {}
       };
 
-      var mockedRequest = {};
-
       try{
-        var clientWillError = require('../../lib/client')(mockedServiceClients,mockedRequest);
+        var clientWillError = require('../../lib/client')(mockedServiceClients);
       }catch(error){
         expect(error).to.exist;
         expect(error.message).include('property[seagullClient] must be specified on object');
@@ -97,14 +92,14 @@ describe('platform client', function() {
         amardaClient : {}
       };
 
-      var mockedRequest = {};
 
-      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+
+      client = require('../../lib/client')(mockedServiceClients);
 
       client.loginUser('fake@user.com','fak3U53r',function(error,userData){
         expect(userData).to.exist;
         expect(error).to.not.exist;
-        done();  
+        done();
       });
 
     });
@@ -118,14 +113,14 @@ describe('platform client', function() {
         amardaClient : {}
       };
 
-      var mockedRequest = {};
 
-      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+
+      client = require('../../lib/client')(mockedServiceClients);
 
       client.loginUser('fake@user.com','fak3U53r',function(error,userData){
         expect(error).to.exist;
         expect(userData).to.not.exist;
-        done();  
+        done();
       });
 
     });
@@ -136,23 +131,21 @@ describe('platform client', function() {
   describe('getUserTeamAndMessages', function() {
 
 
-    it('returns groups', function(done) {
+    it('returns group and the group messages', function(done) {
 
       var mockedServiceClients = {
         userClient : {},
         seagullClient : require('../mock/mockSeagullClient')(),
-        messageClient : {},
-        amardaClient : {}
+        messageClient : require('../mock/mockMessageClient')(),
+        amardaClient : require('../mock/mockAmardaClient')()
       };
 
-      var mockedRequest = {};
-
-      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+      client = require('../../lib/client')(mockedServiceClients);
 
       client.getUserTeamAndMessages('1234','token4user',function(error,groupsData){
         expect(groupsData).to.exist;
         expect(error).to.not.exist;
-        done();  
+        done();
       });
 
     });
@@ -161,26 +154,24 @@ describe('platform client', function() {
 
       var mockedServiceClients = {
         userClient : {},
-        seagullClient : require('../mock/mockSeagullClient')(true),
-        messageClient : {},
-        amardaClient : {}
+        seagullClient : require('../mock/mockSeagullClient')(),
+        messageClient : require('../mock/mockMessageClient')(),
+        amardaClient : require('../mock/mockAmardaClient')(true)
       };
 
-      var mockedRequest = {};
-
-      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+      client = require('../../lib/client')(mockedServiceClients);
 
       client.getUserTeamAndMessages('1234','token4user',function(error,groupsData){
         expect(groupsData).to.not.exist;
         expect(error).to.exist;
-        done();  
+        done();
       });
 
     });
 
 
   });
-*/
+
   describe('getUserTeam', function() {
 
 
@@ -193,9 +184,7 @@ describe('platform client', function() {
         amardaClient : require('../mock/mockAmardaClient')()
       };
 
-      var mockedRequest = {};
-
-      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+      client = require('../../lib/client')(mockedServiceClients);
 
       client.getUserTeam('1234','token4user',function(error,userTeam){
         expect(userTeam).to.exist;
@@ -216,9 +205,7 @@ describe('platform client', function() {
         amardaClient : require('../mock/mockAmardaClient')()
       };
 
-      var mockedRequest = {};
-
-      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+      client = require('../../lib/client')(mockedServiceClients);
 
       client.getUserTeam('1234','token4user',function(error,userTeam){
         expect(userTeam).to.not.exist;
@@ -228,7 +215,7 @@ describe('platform client', function() {
 
     });
   });
-/*
+
   describe('getTeamMessages', function() {
 
     it('returns the team messages', function(done) {
@@ -240,13 +227,11 @@ describe('platform client', function() {
         amardaClient : {}
       };
 
-      var mockedRequest = {};
-
-      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+      client = require('../../lib/client')(mockedServiceClients);
 
       client.getTeamMessages('1234','token4user',function(error,teamMessages){
         expect(teamMessages).to.exist;
-        expect(teamMessages.messages).to.exist;
+        expect(teamMessages).to.be.a('array');
         expect(error).to.not.exist;
         done();
       });
@@ -262,9 +247,7 @@ describe('platform client', function() {
         amardaClient : {}
       };
 
-      var mockedRequest = {};
-
-      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+      client = require('../../lib/client')(mockedServiceClients);
 
       client.getTeamMessages('1234','token4user',function(error,teamMessages){
         expect(teamMessages).to.not.exist;
@@ -275,5 +258,5 @@ describe('platform client', function() {
     });
 
   });
-*/
+
 });
