@@ -32,32 +32,47 @@ describe('platform client', function() {
       client = require('../../lib/client')(mockedServiceClients);
     });
 
-    it('method to loginUser', function(done) {
+    it('method loginUser', function(done) {
 
       expect(client).to.have.property('loginUser');
       done();
 
     });
 
-    it('method to get getUserTeamAndMessages', function(done) {
+    it('method getUserTeamAndMessages', function(done) {
 
       expect(client).to.have.property('getUserTeamAndMessages');
       done();
-
     });
 
-    it('method to get getUserTeam', function(done) {
+    it('method getUserTeam', function(done) {
 
       expect(client).to.have.property('getUserTeam');
       done();
-
     });
 
-    it('method to get getTeamMessages', function(done) {
+    it('method getTeamMessages', function(done) {
 
       expect(client).to.have.property('getTeamMessages');
       done();
+    });
 
+    it('method getMessageThread', function(done) {
+
+      expect(client).to.have.property('getMessageThread');
+      done();
+    });
+
+    it('method replyToMessageThread', function(done) {
+
+      expect(client).to.have.property('replyToMessageThread');
+      done();
+    });
+
+    it('method startMessageThread', function(done) {
+
+      expect(client).to.have.property('startMessageThread');
+      done();
     });
 
     it('throws expection when all expected clients are not given', function(done) {
