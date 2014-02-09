@@ -69,7 +69,7 @@ describe('platform client', function() {
       };
 
       try{
-        var clientWillError = require('../../lib/client')(mockedServiceClients);
+        require('../../lib/client')(mockedServiceClients);
       }catch(error){
         expect(error).to.exist;
         expect(error.message).include('property[seagullClient] must be specified on object');

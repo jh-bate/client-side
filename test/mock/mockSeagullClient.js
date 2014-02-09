@@ -24,7 +24,7 @@ module.exports = function(throwError) {
   return{
     getGroups : function(userid,token,cb){
 
-      var groups = 
+      var groups =
       {
         team:1232,
         uploaders:9999,

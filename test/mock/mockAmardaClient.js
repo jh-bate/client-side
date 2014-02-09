@@ -18,7 +18,7 @@
 module.exports = function(throwError) {
 
   if(throwError==null){
-    throwError = false;    
+    throwError = false;
   }
 
   return{

@@ -2,22 +2,19 @@
   "name": "c-side",
   "version": "0.0.1",
   "description": "playing with client side setup",
-  "main": "lib/index.js",
+  "main": "lib/client.js",
   "directories": {
     "lib": "./lib"
   },
   "scripts": {
-    "start": "node lib/index.js",
     "test": "grunt jshint test"
   },
   "repository": "",
   "author": "",
   "license": "",
   "dependencies": {
-    "superagent": "0.16.0",
-    "amoeba": "0.0.3",
-    "async": "0.2.10",
-    "underscore": "~1.5.2"
+   "amoeba": "0.0.3",
+    "async": "0.2.10"
   },
   "devDependencies": {
     "chai": "1.8.1",
