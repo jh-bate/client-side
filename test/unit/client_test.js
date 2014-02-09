@@ -159,6 +159,9 @@ describe('platform client', function() {
 
       client.getUserTeamAndMessages('1234','token4user',function(error,groupsData){
         expect(groupsData).to.exist;
+        expect(groupsData.team).to.exist;
+        expect(groupsData.team.messages).to.exist;
+        expect(groupsData.team.messages).to.be.a('array');
         expect(error).to.not.exist;
         done();
       });
