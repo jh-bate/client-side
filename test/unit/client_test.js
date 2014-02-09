@@ -26,7 +26,8 @@ describe('platform client', function() {
       var mockedServiceClients = {
         userClient : {},
         seagullClient : {},
-        messageClient : {}
+        messageClient : {},
+        amardaClient : {}
       };
 
       var mockedRequest = {};
@@ -52,7 +53,9 @@ describe('platform client', function() {
 
       var mockedServiceClients = {
         userClient : {},
-        messageClient : {}
+        seagullClient : {},
+        messageClient : {},
+        amardaClient : {}
       };
 
       var mockedRequest = {};
@@ -69,52 +72,188 @@ describe('platform client', function() {
 
   });
 
-describe('login', function() {
+  describe('login', function() {
 
 
-  it('returns userData', function(done) {
+    it('returns userData', function(done) {
 
-    var mockedServiceClients = {
-      userClient : require('../mock/mockUserClient')(),
-      seagullClient : {},
-      messageClient : {}
-    };
+      var mockedServiceClients = {
+        userClient : require('../mock/mockUserClient')(),
+        seagullClient : {},
+        messageClient : {},
+        amardaClient : {}
+      };
 
-    var mockedRequest = {};
+      var mockedRequest = {};
 
-    client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
 
-    client.loginUser('fake@user.com','fak3U53r',function(error,userData){
-      expect(userData).to.exist;
-      expect(error).to.not.exist;
-      done();  
+      client.loginUser('fake@user.com','fak3U53r',function(error,userData){
+        expect(userData).to.exist;
+        expect(error).to.not.exist;
+        done();  
+      });
+
     });
+
+    it('returns error when one is found', function(done) {
+
+      var mockedServiceClients = {
+        userClient : require('../mock/mockUserClient')(true),
+        seagullClient : {},
+        messageClient : {}
+      };
+
+      var mockedRequest = {};
+
+      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+
+      client.loginUser('fake@user.com','fak3U53r',function(error,userData){
+        expect(error).to.exist;
+        expect(userData).to.not.exist;
+        done();  
+      });
+
+    });
+
 
   });
 
-  it('returns error when one throwm', function(done) {
+  describe('getUserTeamsAndMessages', function() {
 
-    var mockedServiceClients = {
-      userClient : require('../mock/mockUserClient')(true),
-      seagullClient : {},
-      messageClient : {}
-    };
 
-    var mockedRequest = {};
+    it('returns groups', function(done) {
 
-    client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : require('../mock/mockSeagullClient')(),
+        messageClient : {}
+      };
 
-    client.loginUser('fake@user.com','fak3U53r',function(error,userData){
-      expect(error).to.exist;
-      expect(userData).to.not.exist;
-      done();  
+      var mockedRequest = {};
+
+      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+
+      client.getUserTeamsAndMessages('1234','token4user',function(error,groupsData){
+        expect(groupsData).to.exist;
+        expect(error).to.not.exist;
+        done();  
+      });
+
     });
+
+    it('returns error when one is found', function(done) {
+
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : require('../mock/mockSeagullClient')(true),
+        messageClient : {}
+      };
+
+      var mockedRequest = {};
+
+      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+
+      client.getUserTeamsAndMessages('1234','token4user',function(error,groupsData){
+        expect(groupsData).to.not.exist;
+        expect(error).to.exist;
+        done();  
+      });
+
+    });
+
 
   });
 
+  describe('getUserTeam', function() {
 
-});
 
+    it('returns the team group', function(done) {
 
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : require('../mock/mockSeagullClient')(),
+        messageClient : {}
+      };
+
+      var mockedRequest = {};
+
+      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+
+      client.getUserTeam('1234','token4user',function(error,userTeam){
+        expect(userTeam).to.exist;
+        expect(userTeam.members).to.exist;
+        expect(userTeam.id).to.exist;
+        expect(error).to.not.exist;
+        done();
+      });
+
+    });
+
+    it('returns error when one is found', function(done) {
+
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : require('../mock/mockSeagullClient')(true),
+        messageClient : {}
+      };
+
+      var mockedRequest = {};
+
+      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+
+      client.getUserTeam('1234','token4user',function(error,userTeam){
+        expect(userTeam).to.not.exist;
+        expect(error).to.exist;
+        done();
+      });
+
+    });
+  });
+
+  describe('getTeamMessages', function() {
+
+    it('returns the team messages', function(done) {
+
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : {},
+        messageClient : require('../mock/mockMessageClient')()
+      };
+
+      var mockedRequest = {};
+
+      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+
+      client.getTeamMessages('1234','token4user',function(error,teamMessages){
+        expect(teamMessages).to.exist;
+        expect(teamMessages.messages).to.exist;
+        expect(error).to.not.exist;
+        done();
+      });
+
+    });
+
+    it('returns error when one is found', function(done) {
+
+      var mockedServiceClients = {
+        userClient : {},
+        seagullClient : {},
+        messageClient : require('../mock/mockMessageClient')(true)
+      };
+
+      var mockedRequest = {};
+
+      client = require('../../lib/client')(mockedServiceClients,mockedRequest);
+
+      client.getTeamMessages('1234','token4user',function(error,teamMessages){
+        expect(teamMessages).to.not.exist;
+        expect(error).to.exist;
+        done();
+      });
+
+    });
+
+  });
 
 });

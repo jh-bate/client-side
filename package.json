@@ -15,7 +15,8 @@
   "license": "",
   "dependencies": {
     "superagent": "0.16.0",
-    "amoeba": "0.0.3"
+    "amoeba": "0.0.3",
+    "async": "0.2.10"
   },
   "devDependencies": {
     "chai": "1.8.1",
