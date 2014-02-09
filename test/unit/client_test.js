@@ -19,7 +19,7 @@ var expect = require('chai').expect;
 describe('platform client', function() {
 
   var client;
-
+/*
   describe('basics', function() {
 
     before(function(){
@@ -42,9 +42,23 @@ describe('platform client', function() {
 
     });
 
-    it('method to get getUserCareGroupsAndMessages', function(done) {
+    it('method to get getUserTeamAndMessages', function(done) {
 
-      expect(client).to.have.property('getUserCareGroupsAndMessages');
+      expect(client).to.have.property('getUserTeamAndMessages');
+      done();
+
+    });
+
+    it('method to get getUserTeam', function(done) {
+
+      expect(client).to.have.property('getUserTeam');
+      done();
+
+    });
+
+    it('method to get getTeamMessages', function(done) {
+
+      expect(client).to.have.property('getTeamMessages');
       done();
 
     });
@@ -53,7 +67,6 @@ describe('platform client', function() {
 
       var mockedServiceClients = {
         userClient : {},
-        seagullClient : {},
         messageClient : {},
         amardaClient : {}
       };
@@ -101,7 +114,8 @@ describe('platform client', function() {
       var mockedServiceClients = {
         userClient : require('../mock/mockUserClient')(true),
         seagullClient : {},
-        messageClient : {}
+        messageClient : {},
+        amardaClient : {}
       };
 
       var mockedRequest = {};
@@ -119,7 +133,7 @@ describe('platform client', function() {
 
   });
 
-  describe('getUserTeamsAndMessages', function() {
+  describe('getUserTeamAndMessages', function() {
 
 
     it('returns groups', function(done) {
@@ -127,14 +141,15 @@ describe('platform client', function() {
       var mockedServiceClients = {
         userClient : {},
         seagullClient : require('../mock/mockSeagullClient')(),
-        messageClient : {}
+        messageClient : {},
+        amardaClient : {}
       };
 
       var mockedRequest = {};
 
       client = require('../../lib/client')(mockedServiceClients,mockedRequest);
 
-      client.getUserTeamsAndMessages('1234','token4user',function(error,groupsData){
+      client.getUserTeamAndMessages('1234','token4user',function(error,groupsData){
         expect(groupsData).to.exist;
         expect(error).to.not.exist;
         done();  
@@ -147,14 +162,15 @@ describe('platform client', function() {
       var mockedServiceClients = {
         userClient : {},
         seagullClient : require('../mock/mockSeagullClient')(true),
-        messageClient : {}
+        messageClient : {},
+        amardaClient : {}
       };
 
       var mockedRequest = {};
 
       client = require('../../lib/client')(mockedServiceClients,mockedRequest);
 
-      client.getUserTeamsAndMessages('1234','token4user',function(error,groupsData){
+      client.getUserTeamAndMessages('1234','token4user',function(error,groupsData){
         expect(groupsData).to.not.exist;
         expect(error).to.exist;
         done();  
@@ -164,7 +180,7 @@ describe('platform client', function() {
 
 
   });
-
+*/
   describe('getUserTeam', function() {
 
 
@@ -173,7 +189,8 @@ describe('platform client', function() {
       var mockedServiceClients = {
         userClient : {},
         seagullClient : require('../mock/mockSeagullClient')(),
-        messageClient : {}
+        messageClient : {},
+        amardaClient : require('../mock/mockAmardaClient')()
       };
 
       var mockedRequest = {};
@@ -195,7 +212,8 @@ describe('platform client', function() {
       var mockedServiceClients = {
         userClient : {},
         seagullClient : require('../mock/mockSeagullClient')(true),
-        messageClient : {}
+        messageClient : {},
+        amardaClient : require('../mock/mockAmardaClient')()
       };
 
       var mockedRequest = {};
@@ -210,7 +228,7 @@ describe('platform client', function() {
 
     });
   });
-
+/*
   describe('getTeamMessages', function() {
 
     it('returns the team messages', function(done) {
@@ -218,7 +236,8 @@ describe('platform client', function() {
       var mockedServiceClients = {
         userClient : {},
         seagullClient : {},
-        messageClient : require('../mock/mockMessageClient')()
+        messageClient : require('../mock/mockMessageClient')(),
+        amardaClient : {}
       };
 
       var mockedRequest = {};
@@ -239,7 +258,8 @@ describe('platform client', function() {
       var mockedServiceClients = {
         userClient : {},
         seagullClient : {},
-        messageClient : require('../mock/mockMessageClient')(true)
+        messageClient : require('../mock/mockMessageClient')(true),
+        amardaClient : {}
       };
 
       var mockedRequest = {};
@@ -255,5 +275,5 @@ describe('platform client', function() {
     });
 
   });
-
+*/
 });

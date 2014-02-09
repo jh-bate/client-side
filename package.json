@@ -16,7 +16,8 @@
   "dependencies": {
     "superagent": "0.16.0",
     "amoeba": "0.0.3",
-    "async": "0.2.10"
+    "async": "0.2.10",
+    "underscore": "~1.5.2"
   },
   "devDependencies": {
     "chai": "1.8.1",

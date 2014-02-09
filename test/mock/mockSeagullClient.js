@@ -24,14 +24,15 @@ module.exports = function(throwError) {
   return{
     getGroups : function(userid,token,cb){
 
-      var groups = [{
-        id:1232,
-        members:['1','3',userid]
-      },
+      var groups = 
       {
-        id:1234,
-        members:[userid,'2','4']
-      }];
+        team:1232,
+        uploaders:9999,
+        viewers:33567,
+        patients:1234,
+        invited:null,
+        invitedby:null
+      };
 
       if(throwError){
         return cb(new Error(),null);
