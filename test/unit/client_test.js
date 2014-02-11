@@ -14,7 +14,7 @@
 // == BSD2 LICENSE ==
 
 'use strict';
-var expect = require('chai').expect;
+var expect = require('salinity').expect;
 
 describe('platform client', function() {
 
@@ -48,6 +48,12 @@ describe('platform client', function() {
     it('method getUserTeam', function(done) {
 
       expect(client).to.have.property('getUserTeam');
+      done();
+    });
+
+    it('method getUserPatients', function(done) {
+
+      expect(client).to.have.property('getUserPatients');
       done();
     });
 
@@ -205,10 +211,9 @@ describe('platform client', function() {
       client = require('../../lib/client')(mockedServiceClients);
 
       client.getUserTeam('1234','token4user',function(error,userTeam){
-        expect(userTeam).to.exist;
-        expect(userTeam.members).to.exist;
-        expect(userTeam.id).to.exist;
-        expect(error).to.not.exist;
+        expect(userTeam.team).to.exist;
+        expect(userTeam.team.members).to.exist;
+        expect(userTeam.team.id).to.exist;
         done();
       });
 
