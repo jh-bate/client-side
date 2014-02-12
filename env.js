@@ -21,8 +21,14 @@ module.exports = (function(){
   var env = {};
 
   env.userApi = {
-    // Name of the hakken service for user-api discovery
-    serviceName: config.fromEnvironment("USER_API_SERVICE")
+   // Name of the hakken service for user-api discovery
+    serviceName: config.fromEnvironment("USER_API_SERVICE"),
+
+    // Name of this server to pass to user-api when getting a server token
+    serverName: config.fromEnvironment("SERVER_NAME", "seagull"),
+
+    // The secret to use when getting a server token from user-api
+    serverSecret: config.fromEnvironment("SERVER_SECRET")
   };
 
   env.seagull = {
@@ -38,6 +44,10 @@ module.exports = (function(){
   env.armada = {
     // Name of the hakken service for seagull discovery
     serviceName: config.fromEnvironment("ARMADA_SERVICE")
+  };
+
+  env.discovery = {
+    host: config.fromEnvironment('DISCOVERY_HOST')
   };
 
 

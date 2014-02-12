@@ -27,7 +27,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : {},
         messageClient : {},
-        amardaClient : {}
+        armadaClient : {}
       };
       client = require('../../lib/client')(mockedServiceClients);
     });
@@ -86,7 +86,7 @@ describe('platform client', function() {
       var mockedServiceClients = {
         userClient : {},
         messageClient : {},
-        amardaClient : {}
+        armadaClient : {}
       };
 
       try{
@@ -110,7 +110,7 @@ describe('platform client', function() {
         userClient : require('../mock/mockUserClient')(),
         seagullClient : {},
         messageClient : {},
-        amardaClient : {}
+        armadaClient : {}
       };
 
 
@@ -131,7 +131,7 @@ describe('platform client', function() {
         userClient : require('../mock/mockUserClient')(true),
         seagullClient : {},
         messageClient : {},
-        amardaClient : {}
+        armadaClient : {}
       };
 
 
@@ -158,7 +158,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : require('../mock/mockSeagullClient')(),
         messageClient : require('../mock/mockMessageClient')(),
-        amardaClient : require('../mock/mockAmardaClient')()
+        armadaClient : require('../mock/mockArmadaClient')()
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -180,7 +180,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : require('../mock/mockSeagullClient')(),
         messageClient : require('../mock/mockMessageClient')(),
-        amardaClient : require('../mock/mockAmardaClient')(true)
+        armadaClient : require('../mock/mockArmadaClient')(true)
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -205,7 +205,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : require('../mock/mockSeagullClient')(),
         messageClient : {},
-        amardaClient : require('../mock/mockAmardaClient')()
+        armadaClient : require('../mock/mockArmadaClient')()
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -225,7 +225,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : require('../mock/mockSeagullClient')(true),
         messageClient : {},
-        amardaClient : require('../mock/mockAmardaClient')()
+        armadaClient : require('../mock/mockArmadaClient')()
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -247,7 +247,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : {},
         messageClient : require('../mock/mockMessageClient')(),
-        amardaClient : {}
+        armadaClient : {}
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -267,7 +267,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : {},
         messageClient : require('../mock/mockMessageClient')(true),
-        amardaClient : {}
+        armadaClient : {}
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -290,7 +290,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : {},
         messageClient : require('../mock/mockMessageClient')(),
-        amardaClient : {}
+        armadaClient : {}
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -310,7 +310,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : {},
         messageClient : require('../mock/mockMessageClient')(true),
-        amardaClient : {}
+        armadaClient : {}
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -333,7 +333,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : {},
         messageClient : require('../mock/mockMessageClient')(),
-        amardaClient : {}
+        armadaClient : {}
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -360,7 +360,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : {},
         messageClient : require('../mock/mockMessageClient')(true),
-        amardaClient : {}
+        armadaClient : {}
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -391,7 +391,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : {},
         messageClient : require('../mock/mockMessageClient')(),
-        amardaClient : {}
+        armadaClient : {}
       };
 
       client = require('../../lib/client')(mockedServiceClients);
@@ -417,7 +417,7 @@ describe('platform client', function() {
         userClient : {},
         seagullClient : {},
         messageClient : require('../mock/mockMessageClient')(true),
-        amardaClient : {}
+        armadaClient : {}
       };
 
       client = require('../../lib/client')(mockedServiceClients);

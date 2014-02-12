@@ -15,7 +15,12 @@
   "dependencies": {
     "amoeba": "0.0.3",
     "async": "0.2.10",
-    "underscore": "1.6.0"
+    "underscore": "1.6.0",
+    "user-api-client": "0.1.4",
+    "seagull-client": "0.0.1",
+    "message-api-client": "tidepool-org/message-api-client",
+    "armada-client": "tidepool-org/armada-client",
+    "hakken": "0.1.0"
   },
   "devDependencies": {
     "grunt": "0.4.1",
