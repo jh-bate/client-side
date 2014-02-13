@@ -37,7 +37,6 @@ describe('platform client', function() {
     serviceClients.init(function(error){
       client = require('../../lib/client')(serviceClients.getClients());
       createUser(function(error,data){
-        console.log('created user ',data);
         done();
       });
     });
@@ -45,9 +44,10 @@ describe('platform client', function() {
 
   it('user logs in and gets team and messages', function(done) {
 
-    client.loginUser('fake','fak3U53r',function(err,data){
-      console.log('error? ',err);
-      console.log('data? ',data);
+    client.loginUser('fake','fak3U53r',function(error,data){
+      expect(error).to.not.exist;
+      expect(data).to.exist;
+      done();
     });
   });
 
@@ -58,12 +58,14 @@ describe('platform client', function() {
         [
           function(cb) {
             client.loginUser('fake','fak3U53r',cb);
-            console.log();
           },
-          function(userid, cb) {
+          function(userToken, cb) {
+            client.getUser(userToken,cb);
+          },
+          function(token, cb) {
 
-            console.log('userid',userid);
-            client.getUserTeamAndMessages(userid,'what',cb);
+            console.log('## user logged in ## ',token);
+            client.getUserTeamAndMessages(userid,token,cb);
           }
         ],
         function(err, userdata) {
