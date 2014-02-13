@@ -1,2 +1,6 @@
 /node_modules
 config/env.sh
+
+lib/chedderStyle.js
+
+test/unit/tidepoolPlatform_test.js
