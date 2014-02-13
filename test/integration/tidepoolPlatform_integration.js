@@ -15,8 +15,6 @@
 
 'use strict';
 var expect = require('salinity').expect;
-var async = require('async');
-var superagent = require('superagent');
 var userId;
 
 describe('platform client', function() {
@@ -43,8 +41,6 @@ describe('platform client', function() {
   var addUserTeamGroup=function(cb){
     console.log('add team');
     platform.addGroupForUser(userId, { members : [userId]}, 'team', function(error,data){
-      console.log('error adding group? ',error);
-      console.log('groupId ',data);
       cb(error,data);
     });
   };
@@ -93,13 +89,89 @@ describe('platform client', function() {
 
   });
 
+  describe('messages',function(){
 
-  /*it('creates a team group for the user', function(done) {
-    platform.login(user,function(error,data){
-      expect(error).to.not.exist;
-      expect(data).to.exist;
-      done();
+    var groupId;
+
+    before(function(done){
+
+      addUserTeamGroup(function(error,data){
+        if(error){
+          throw error;
+        }
+        groupId = data;
+        done();
+      });
+
     });
-  });*/
+
+    it('add a note and then comment on it, then get the whole thread', function(done) {
+
+      var message = {
+        userid : userId,
+        groupid : groupId,
+        timestamp : Date(),
+        messagetext : 'In three words I can sum up everything I have learned about life: it goes on.'
+      };
+      //add note
+      platform.startMessageThread(groupId, message, function(error,data){
+        expect(error).to.not.exist;
+        expect(data).to.exist;
+
+        var messageId = data;
+
+        var comment = {
+          userid : userId,
+          groupid : groupId,
+          timestamp : Date(),
+          messagetext : 'Good point bro!'
+        };
+        //comment on the note
+        platform.replyToMessageThread(messageId,comment, function(error,data){
+
+          expect(error).to.not.exist;
+          expect(data).to.exist;
+
+          //get the whole thread
+          platform.getMessageThread(messageId, function(error,data){
+            expect(error).to.not.exist;
+            expect(data).to.exist;
+            expect(data.length).to.equal(2);
+            var firstMessage = data[0];
+            var secondMessage = data[1];
+
+            expect(firstMessage.groupid).to.equal(groupId);
+            expect(secondMessage.groupid).to.equal(groupId);
+            expect(firstMessage.parentmessage).to.not.exist;
+            expect(firstMessage.messagetext).to.equal(message.messagetext);
+            expect(secondMessage.parentmessage).to.equal(firstMessage.id);
+            expect(secondMessage.messagetext).to.equal(comment.messagetext);
+
+                        
+            done();
+          });
+
+        });
+
+      });
+    });
+
+    it('all messages for the group from the last two weeks', function(done) {
+
+      var twoWeeksAgo = new Date();
+      twoWeeksAgo.setDate(twoWeeksAgo.getDate()-14);
+
+      console.log('from ',twoWeeksAgo);
+
+      platform.getAllMessagesForTeam(groupId, twoWeeksAgo,null, function(error,data){
+        expect(error).to.not.exist;
+        expect(data).to.exist;
+        console.log('all messages',data);
+                    
+        done();
+      });
+    });
+
+  });
 
 });
